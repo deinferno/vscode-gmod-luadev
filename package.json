@@ -28,7 +28,10 @@
         "onCommand:gmod-luadev.shared",
         "onCommand:gmod-luadev.clients",
         "onCommand:gmod-luadev.self",
-        "onCommand:gmod-luadev.client"
+        "onCommand:gmod-luadev.client",
+        "onCommand:gmod-luadev.ent",
+        "onCommand:gmod-luadev.wep",
+        "onCommand:gmod-luadev.eff"
     ],
     "main": "./out/src/extension",
     "contributes": {
@@ -39,13 +42,44 @@
                     "type": "integer",
                     "default": 27099,
                     "description": "Port number to communicate with LuaDev over."
-                },
-                "gmod-luadev.hidescriptname": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "If false, script names will be transmitted with the script when sent."
                 }
             }
+        },
+        "menus": {
+            "editor/title/context": [
+                {
+                    "command": "gmod-luadev.self",
+                    "group": "navigation"
+                },
+                {
+					"command": "gmod-luadev.server",
+					"group": "navigation"
+                },
+                {
+					"command": "gmod-luadev.client",
+					"group": "navigation"
+				},
+                {
+					"command": "gmod-luadev.clients",
+					"group": "navigation"
+				},
+                {
+					"command": "gmod-luadev.shared",
+					"group": "navigation"
+				},
+                {
+					"command": "gmod-luadev.ent",
+					"group": "navigation"
+				},
+                {
+					"command": "gmod-luadev.wep",
+					"group": "navigation"
+				},
+                {
+					"command": "gmod-luadev.eff",
+					"group": "navigation"
+				}
+            ]
         },
         "commands": [
             {
@@ -72,6 +106,21 @@
                 "command": "gmod-luadev.client",
                 "title": "Send to Client",
                 "category": "GMod LuaDev"
+            },
+            {
+                "command": "gmod-luadev.ent",
+                "title": "Send ENT",
+                "category": "GMod LuaDev"
+            },
+            {
+                "command": "gmod-luadev.wep",
+                "title": "Send SWEP",
+                "category": "GMod LuaDev"
+            },
+            {
+                "command": "gmod-luadev.eff",
+                "title": "Send EFFECT",
+                "category": "GMod LuaDev"
             }
         ]
     },
@@ -81,7 +130,8 @@
         "postinstall": "node ./node_modules/vscode/bin/install"
     },
     "devDependencies": {
-        "typescript": "^1.8.5",
-        "vscode": "^0.11.0"
+        "@types/node": "^14.14.6",
+        "typescript": "^1.8.10",
+        "vscode": "^0.11.18"
     }
 }

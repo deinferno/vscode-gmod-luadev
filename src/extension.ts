@@ -16,15 +16,8 @@ function send( realm: string, client?: string ): void {
 
 	// Common //
 
-	const config = vscode.workspace.getConfiguration( "gmod-luadev" )
+	const config = vscode.workspace.getConfiguration( "gmod-luadev" );
 	const document = vscode.window.activeTextEditor.document;
-
-	// Document Title //
-
-	const document_title =
-		config.get( "hidescriptname", false )
-			? "_"
-			: path.basename( document.uri.fsPath );
 
 	// Open Socket //
 
@@ -32,7 +25,8 @@ function send( realm: string, client?: string ): void {
 	socket.connect( config.get( "port", 27099 ) );
 	socket.write(
 		realm + "\n" +
-		document_title + "\n" +
+		path.basename(path.dirname( document.uri.fsPath )) + "\n" +
+		path.basename( document.uri.fsPath ) + "\n" +
 		client + "\n" +
 		document.getText()
 	);
@@ -87,7 +81,10 @@ export function activate( context: vscode.ExtensionContext ): void {
 		command( "gmod-luadev.shared", () => send( "sh" ) ),
 		command( "gmod-luadev.clients", () => send( "cl" ) ),
 		command( "gmod-luadev.self", () => send( "self" ) ),
-		command( "gmod-luadev.client", getPlayerList )
+		command( "gmod-luadev.client", getPlayerList ),
+		command( "gmod-luadev.ent", () => send( "ent" ) ),
+		command( "gmod-luadev.wep", () => send( "wep" ) ),
+		command( "gmod-luadev.eff", () => send( "eff" ) )
 	);
 
 }
